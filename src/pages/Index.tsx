@@ -12,10 +12,10 @@ export default function Index() {
   };
 
   const schedule = [
-    { time: '14:00 - 16:00', event: 'CS:GO Турнир', prize: '50 000 ₽', status: 'Регистрация' },
-    { time: '17:00 - 19:00', event: 'Dota 2 Championship', prize: '100 000 ₽', status: 'Скоро' },
-    { time: '20:00 - 22:00', event: 'Valorant Battle', prize: '30 000 ₽', status: 'Открыто' },
-    { time: '23:00 - 01:00', event: 'League of Legends', prize: '75 000 ₽', status: 'Скоро' },
+    { time: '10:00 - 14:00', period: 'Утренняя сессия', price: '300 ₽/час', status: 'Свободно' },
+    { time: '14:00 - 18:00', period: 'Дневная сессия', price: '350 ₽/час', status: 'Занято' },
+    { time: '18:00 - 22:00', period: 'Вечерняя сессия', price: '400 ₽/час', status: 'Свободно' },
+    { time: '22:00 - 00:00', period: 'Ночная сессия', price: '350 ₽/час', status: 'Свободно' },
   ];
 
   const features = [
@@ -25,14 +25,14 @@ export default function Index() {
       description: 'RTX 4090, Intel i9, 240Hz мониторы',
     },
     {
-      icon: 'Trophy',
-      title: 'Турниры 24/7',
-      description: 'Еженедельные соревнования с призами',
+      icon: 'Clock',
+      title: 'Работаем до полуночи',
+      description: 'Открыты каждый день с 10:00 до 00:00',
     },
     {
       icon: 'Users',
-      title: 'Команда профи',
-      description: 'Обучение от киберспортсменов',
+      title: 'Дружное комьюнити',
+      description: 'Найди друзей для игр',
     },
     {
       icon: 'Zap',
@@ -110,8 +110,8 @@ export default function Index() {
                 size="lg"
                 className="bg-gradient-to-r from-primary to-secondary hover:scale-110 transition-all shadow-2xl shadow-primary/50 text-lg px-8 py-6"
               >
-                <Icon name="Trophy" size={20} className="mr-2" />
-                Турниры
+                <Icon name="Clock" size={20} className="mr-2" />
+                Расписание
               </Button>
               <Button
                 onClick={() => scrollToSection('about')}
@@ -185,11 +185,11 @@ export default function Index() {
                       </li>
                       <li className="flex items-center gap-2">
                         <Icon name="Check" className="text-primary" size={16} />
-                        Профессиональные тренеры
+                        Работаем каждый день с 10:00 до 00:00
                       </li>
                       <li className="flex items-center gap-2">
                         <Icon name="Check" className="text-primary" size={16} />
-                        Еженедельные турниры с призовым фондом
+                        Дружное игровое комьюнити
                       </li>
                       <li className="flex items-center gap-2">
                         <Icon name="Check" className="text-primary" size={16} />
@@ -206,12 +206,12 @@ export default function Index() {
                 <h3 className="font-heading text-3xl font-bold mb-6">Наши достижения</h3>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center p-6 bg-card/50 rounded-lg neon-border border-primary">
-                    <div className="text-5xl font-heading font-bold text-primary mb-2">150+</div>
-                    <div className="text-sm text-muted-foreground">Турниров проведено</div>
+                    <div className="text-5xl font-heading font-bold text-primary mb-2">40+</div>
+                    <div className="text-sm text-muted-foreground">Игровых станций</div>
                   </div>
                   <div className="text-center p-6 bg-card/50 rounded-lg neon-border border-secondary">
-                    <div className="text-5xl font-heading font-bold text-secondary mb-2">5M+</div>
-                    <div className="text-sm text-muted-foreground">Призовой фонд ₽</div>
+                    <div className="text-5xl font-heading font-bold text-secondary mb-2">14</div>
+                    <div className="text-sm text-muted-foreground">Часов работы в день</div>
                   </div>
                   <div className="text-center p-6 bg-card/50 rounded-lg neon-border border-accent">
                     <div className="text-5xl font-heading font-bold text-accent mb-2">2000+</div>
@@ -231,8 +231,8 @@ export default function Index() {
       <section id="schedule" className="min-h-screen flex items-center py-20 px-6 relative">
         <div className="container mx-auto relative z-10">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-6xl font-heading font-bold mb-4 text-glow">Расписание турниров</h2>
-            <p className="text-xl text-muted-foreground">Сегодня • {new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}</p>
+            <h2 className="text-6xl font-heading font-bold mb-4 text-glow">Расписание работы клуба</h2>
+            <p className="text-xl text-muted-foreground">Ежедневно • 10:00 - 00:00</p>
           </div>
 
           <div className="max-w-4xl mx-auto space-y-6">
@@ -254,29 +254,27 @@ export default function Index() {
                       
                       <div>
                         <h3 className="font-heading text-2xl font-bold mb-1 group-hover:text-primary transition-colors">
-                          {item.event}
+                          {item.period}
                         </h3>
                         <div className="flex items-center gap-2 text-muted-foreground">
-                          <Icon name="Trophy" size={16} className="text-accent" />
-                          <span>Призовой фонд: {item.prize}</span>
+                          <Icon name="Wallet" size={16} className="text-accent" />
+                          <span>{item.price}</span>
                         </div>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-4">
                       <div className={`px-4 py-2 rounded-lg font-bold ${
-                        item.status === 'Открыто' 
+                        item.status === 'Свободно' 
                           ? 'bg-accent/20 text-accent neon-border border-accent' 
-                          : item.status === 'Регистрация'
-                          ? 'bg-primary/20 text-primary neon-border border-primary'
                           : 'bg-muted text-muted-foreground'
                       }`}>
                         {item.status}
                       </div>
                       
                       <Button className="bg-gradient-to-r from-primary to-secondary hover:scale-110 transition-transform">
-                        <Icon name="UserPlus" size={18} className="mr-2" />
-                        Участвовать
+                        <Icon name="Calendar" size={18} className="mr-2" />
+                        Забронировать
                       </Button>
                     </div>
                   </div>
@@ -286,9 +284,10 @@ export default function Index() {
           </div>
 
           <div className="mt-12 text-center animate-scale-in">
+            <p className="text-muted-foreground text-lg mb-4">Забронируйте место заранее или приходите в любое время!</p>
             <Button size="lg" variant="outline" className="border-primary/50 hover:bg-primary/10">
-              <Icon name="Calendar" size={20} className="mr-2" />
-              Полное расписание
+              <Icon name="Phone" size={20} className="mr-2" />
+              Позвонить и забронировать
             </Button>
           </div>
         </div>
